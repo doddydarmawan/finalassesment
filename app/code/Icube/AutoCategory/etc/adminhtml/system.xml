@@ -1,0 +1,30 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="auto_category" translate="label" class="a-custom-css-class-to-style-this-tab" sortOrder="10">
+            <label>Auto Category</label>
+        </tab>
+        <!-- section untuk munculin option di bawah menu traine -->
+        <section id="auto_category_setting" showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="10" translate="label">
+            <label>Auto Category</label>
+            <tab>auto_category</tab>
+            <resource>Icube_AutoCategory::config</resource>
+            <!-- Group untuk munculin 1 box atau grup baru di dalam tab -->
+            <group id="general" translate="label comment" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Auto Category</label>
+                <comment>An additional comment helping users to understand the effect when configuring the fields defined in this group.</comment>
+                <!-- Add your fields here. -->
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="days_range" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <validate>required-entry validate-digits</validate>
+                    <label>Days Range</label>
+                </field>
+                <field id="cron" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Cron</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,11 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <auto_category_setting>
+            <general>
+                <enable></enable>
+                <days_range></days_range>
+                <cron></cron>
+            </general>
+        </auto_category_setting>
+    </default>
+</config>
