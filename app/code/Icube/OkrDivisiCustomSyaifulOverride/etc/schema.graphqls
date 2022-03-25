@@ -1,0 +1,71 @@
+type Query {
+    getAcaraSyaifulById(
+        id: Int!
+    ): AcaraOutput @resolver(class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\GetAcaraSyaifulById") @doc(description: "The getAcaraSyaifulById query returns information about a acara")
+    searchAcaraSyaiful(
+        search: String @doc(description: "search by acara nama."),
+        filter: AcaraFilterInput @doc(description: "Identifies which product attributes to search for and return."),
+        pageSize: Int = 5 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional."),
+        currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1."),
+        sort: AcaraSortInput @doc(description: "Specifies which attributes to sort on, and whether to return the results in ascending or descending order.")
+    ): ListAcaraOutput @resolver(class: "\\Icube\\OkrDivisiCustomSyaifulOverride\\Model\\Resolver\\SearchAcaraSyaiful") @doc(description: "The searchAcaraSyaiful query returns information about a acara") @cache(cacheIdentity: "\\Icube\\OkrDivisiCustomSyaifulOverride\\Model\\Resolver\\CacheIdentity\\SearchCriteriaAcaraCacheIdentities")
+}
+
+type Mutation {
+    buatAcaraSyaiful(
+        input: AcaraInput!
+    ): AcaraOutput @resolver(class: "\\Icube\\OkrDivisiCustomSyaifulOverride\\Model\\Resolver\\BuatAcaraSyaiful") @doc(description: "add acara with peserta")
+    editAcaraSyaiful(
+        input: AcaraUpdateInput!
+    ): AcaraOutput @resolver(class: "\\Icube\\OkrDivisiCustomSyaifulOverride\\Model\\Resolver\\EditAcaraSyaiful") @doc(description: "update acara by id")
+}
+
+type ListAcaraOutput {
+    items: [AcaraOutput] @doc(description: "An array of acara that match the specified search criteria.")
+    page_info: SearchResultPageInfo @doc(description: "An object that includes the page_info and currentPage values specified in the query.")
+    total_count: Int @doc(description: "The number of products returned.")
+}
+
+type AcaraOutput {
+    id: Int @doc(description: "The id of the acara")
+    nama: String @doc(description: "The name of the acara")
+    pemateri: String @doc(description: "The division of the acara")
+    tanggal: String @doc(description: "The date of the acara") # update
+    peserta: [PesertaOutput] @doc(description: "An array of peserta")
+}
+
+type PesertaOutput {
+    nama: String @doc(description: "The name of peserta")
+}
+
+input AcaraInput {
+    nama: String @doc(description: "The nama of the acara")
+    pemateri: String @doc(description: "The division of the acara")
+    tanggal: String @doc(description: "The date of the acara") # update
+    peserta: [PesertaInput!] @doc(description: "An array of peserta")
+}
+
+input PesertaInput {
+    name: String @doc(description: "The nama of peserta")
+}
+
+input AcaraUpdateInput {
+    id: Int @doc(description: "The id of the acara")
+    nama: String @doc(description: "The nama of the acara")
+    pemateri: String @doc(description: "The division of the acara")
+    tanggal: String @doc(description: "The date of the acara") # update
+}
+
+input AcaraFilterInput {
+    id: FilterTypeInput @doc(description: "The acara id.")
+    nama: FilterTypeInput @doc(description: "The acara nama.")
+    pemateri: FilterTypeInput @doc(description: "The pemateri.")
+    tanggal: FilterTypeInput @doc(description: "The tanggal.")
+}
+
+input AcaraSortInput {
+    id: SortEnum @doc(description: "Sort by the search id.")
+    nama: SortEnum @doc(description: "Sort by the search nama.")
+    divisi: SortEnum @doc(description: "Sort by the search divisi.")
+    tanggal: SortEnum @doc(description: "Sort by the search divisi.")
+}

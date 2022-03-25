@@ -1,0 +1,41 @@
+type Query {
+    getAcaraSyaifulById(
+        id: Int!
+    ): AcaraOutput @resolver(class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\GetAcaraSyaifulById") @doc(description: "The getAcaraSyaifulById query returns information about a acara")
+}
+
+type Mutation {
+    buatAcaraSyaiful(
+        input: AcaraInput!
+    ): AcaraOutput @resolver(class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\BuatAcaraSyaiful") @doc(description: "add acara with peserta")
+    editAcaraSyaiful(
+        input: AcaraUpdateInput!
+    ): AcaraOutput @resolver(class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\EditAcaraSyaiful") @doc(description: "update acara by id")
+}
+
+type AcaraOutput {
+    id: Int @doc(description: "The id of the acara")
+    nama: String @doc(description: "The name of the acara")
+    pemateri: String @doc(description: "The division of the acara")
+    peserta: [PesertaOutput] @doc(description: "An array of peserta")
+}
+
+type PesertaOutput {
+    nama: String @doc(description: "The name of peserta")
+}
+
+input AcaraInput {
+    nama: String @doc(description: "The name of the acara")
+    pemateri: String @doc(description: "The division of the acara")
+    peserta: [PesertaInput!] @doc(description: "An array of peserta")
+}
+
+input PesertaInput {
+    name: String @doc(description: "The name of peserta")
+}
+
+input AcaraUpdateInput {
+    id: Int @doc(description: "The id of the acara")
+    nama: String @doc(description: "The name of the acara")
+    pemateri: String @doc(description: "The division of the acara")
+}
