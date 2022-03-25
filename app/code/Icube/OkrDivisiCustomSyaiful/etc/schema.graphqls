@@ -1,0 +1,64 @@
+type Mutation {
+    buatAcaraSyaiful(input: AddEventAndParticipantInput!): EventAndParticipantOutput @resolver(class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\BuatAcaraSyaiful") @doc(description: "add event and participant")
+    editAcaraSyaiful(input: EditAcaraSyaifulInput!): EventAndParticipantOutput @resolver(class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\EditAcaraSyaiful") @doc(description: "edit event")
+}
+
+type Query {
+    searchAcaraSyaiful(
+        search: String @doc(description: "search by trainer name."),
+        filter: AcaraSyaifulFilterInput @doc(description: "Identifies which product attributes to search for and return."),
+        pageSize: Int = 5 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional."),
+        currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1."),
+        sort: AcaraSyaifulSortInput @doc(description: "Specifies which attributes to sort on, and whether to return the results in ascending or descending order.")
+    ): AcaraSyaifulsOutput @resolver(class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\SearchAcaraSyaiful") @doc(description: "The SearchAcaraSyaiful query returns information about a event")
+    getAcaraSyaifulById(id: Int!): EventAndParticipantOutput @resolver(class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\GetAcaraSyaifulById") @doc(description: "The FindEventById query returns information about a event") @cache(cacheIdentity: "Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\AcaraSyaiful\\AcaraSyaifulIdentity")
+}
+
+input AddEventAndParticipantInput {
+    nama: String @doc(description: "The name of the event")
+    pemateri: String @doc(description: "The pemateri of the event")
+    tanggal: String @doc(description: "The date of the event")
+    peserta: [ParticipantInput]
+}
+
+input EditAcaraSyaifulInput {
+    id: Int @doc(description: "The id of the event")
+    nama: String @doc(description: "The name of the event")
+    pemateri: String @doc(description: "The pemateri of the event")
+    tanggal: String @doc(description: "The date of the event")
+}
+
+
+input ParticipantInput {
+    nama: String @doc(description: "The name of the participant")
+}
+
+type ParticipantOutput {
+    nama: String @doc(description: "The name of the participant")
+}
+
+type EventAndParticipantOutput {
+    entity_id: Int @doc(description: "The id of the event")
+    nama: String @doc(description: "The name of the event")
+    pemateri: String @doc(description: "The pemateri of the event")
+    tanggal: String @doc(description: "The date of the event")
+    peserta: [ParticipantOutput]
+}
+
+type AcaraSyaifulsOutput {
+    items: [EventAndParticipantOutput] @doc(description: "An array of event that match the specified search criteria.")
+    page_info: SearchResultPageInfo @doc(description: "An object that includes the page_info and currentPage values specified in the query.")
+    total_count: Int @doc(description: "The number of products returned.")
+}
+
+input AcaraSyaifulSortInput {
+    id: SortEnum @doc(description: "Sort by the search id.")
+    nama: SortEnum @doc(description: "Sort by the search name.")
+    pemateri: SortEnum @doc(description: "Sort by the search pemateri.")
+}
+
+input AcaraSyaifulFilterInput {
+    id: FilterTypeInput @doc(description: "The event id.")
+    nama: FilterTypeInput @doc(description: "The event name.")
+    pemateri: FilterTypeInput @doc(description: "The event pemateri.")
+}
