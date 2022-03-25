@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
+    <system>
+        <tab id="autocategory" translate="label" sortOrder="10">
+            <label>Auto Category</label>
+        </tab>
+        <section id="autocategory_setting" translate="label" type="text" sortOrder="108" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Auto Category Setting</label>
+            <tab>autocategory</tab>  
+            <resource>Icube_AutoCategory::autocategory_menu</resource>
+             <group id="configauto" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Config</label>
+                 <field id="enablemo" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label> 
+                    <comment>Type "yes" for enable auto category/ type "no" for no</comment>
+                </field>
+                 <field id="range" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>New Range </label>
+                    <comment>In Days</comment>
+                    <validate>validate-number</validate>
+                </field>
+                 <field id="cron" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Using cron?</label> 
+                    <comment>Type "yes" for using cron (30 minutes) only / type "no" for using comand only</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
