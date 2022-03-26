@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Icube\OkrDivisiCustomSyaiful\Model\Acara" type="Icube\OkrDivisiCustomSyaifulOverride\Model\Acara" />
+    <preference for="Icube\OkrDivisiCustomSyaiful\Api\Data\AcaraInterface" type="Icube\OkrDivisiCustomSyaifulOverride\Api\Data\AcaraInterface" />
+    <preference for="Icube\OkrDivisiCustomSyaiful\Model\AcaraRepository" type="Icube\OkrDivisiCustomSyaifulOverride\Model\AcaraRepository" />
+    <preference for="Icube\OkrDivisiCustomSyaiful\Model\ResourceModel\Acara\Collection" type="Icube\OkrDivisiCustomSyaifulOverride\Model\ResourceModel\Acara\Collection" />
+    <preference for="Icube\OkrDivisiCustomSyaiful\Model\Resolver\AddAcara" type="Icube\OkrDivisiCustomSyaifulOverride\Model\Resolver\AddAcara" />
+    <preference for="Icube\OkrDivisiCustomSyaiful\etc\schema" type="Icube\OkrDivisiCustomSyaifulOverride\etc\schema" />
+    <preference for="Icube\OkrDivisiCustomSyaiful\Model\Resolver\UpdateAcara" type="Icube\OkrDivisiCustomSyaifulOverride\Model\Resolver\UpdateAcara" />
+    <preference for="Icube\OkrDivisiCustomSyaiful\Model\ResourceModel\Acara" type="Icube\OkrDivisiCustomSyaifulOverride\Model\ResourceModel\Acara" />
+    <preference for="Icube\OkrDivisiCustomSyaiful\Api\AcaraRepositoryInterface" type="Icube\OkrDivisiCustomSyaifulOverride\Model\AcaraRepository" />
+    <preference for="Icube\OkrDivisiCustomSyaifulOverride\Api\Data\AcaraInterface" type="Icube\OkrDivisiCustomSyaifulOverride\Model\Acara" />    
+</config>

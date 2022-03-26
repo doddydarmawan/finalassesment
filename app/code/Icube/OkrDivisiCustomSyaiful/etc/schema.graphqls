@@ -1,0 +1,73 @@
+type Query {
+    getAcaraById(entity_id: Int!): AcaraOutput
+        @resolver(
+            class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\GetAcaraById"
+        )
+        @doc(
+            description: "The GetAcaraById query returns information about a Acara"
+        )
+}
+
+type Mutation {
+    addAcara(input: addAcaraInput!): AcaraOutput
+        @resolver(
+            class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\AddAcara"
+        )
+        @doc(description: "membuat acara")
+    addPeserta(input: addPesertaInput!): PesertaOutput
+        @resolver(
+            class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\AddPeserta"
+        )
+        @doc(description: "membuat acara")
+    updateAcara(input: updateAcaraInput!): AcaraOutput
+        @resolver(
+            class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\UpdateAcara"
+        )
+        @doc(description: "Memperbarui acara")
+    deleteAcara(entity_id: Int!): StatusOutput
+        @resolver(
+            class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\DeleteAcara"
+        )
+        @doc(description: "Menghapus acara")
+}
+
+input addPesertaInput {
+    nama: String @doc(description: "nama Peserta")
+    acara_id: Int @doc(description: "acara_id Peserta")
+}
+
+type StatusOutput {
+    status: String @doc(description: "status delete")
+}
+
+type PesertaOutput {
+    entity_id: Int @doc(description: "id Peserta")
+    nama: String @doc(description: "nama Peserta")
+    acara_id: Int @doc(description: "acara_id Peserta")
+}
+
+input updateAcaraInput {
+    entity_id: Int @doc(description: "id Acara")
+    nama: String @doc(description: "nama Acara")
+    pemateri: String @doc(description: "pemateri Acara")
+}
+
+input addAcaraInput {
+    nama: String @doc(description: "nama Acara")
+    pemateri: String @doc(description: "pemateri Acara")
+    peserta: [pesertaInput] @doc(description: "peserta Acara")
+}
+
+input pesertaInput {
+    nama: String @doc(description: "nama Peserta")
+}
+
+type AcaraOutput {
+    entity_id: Int @doc(description: "id Acara")
+    nama: String @doc(description: "nama Acara")
+    pemateri: String @doc(description: "pemateri Acara")
+    peserta: [peserta] @doc(description: "peserta Acara")
+}
+type peserta {
+    nama: String @doc(description: "nama Acara")
+}

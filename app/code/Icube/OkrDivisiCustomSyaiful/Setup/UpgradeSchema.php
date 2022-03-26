@@ -65,15 +65,12 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     null,
                     ['nullable' => false, 'primary' => true],
                     'pemateri peserta'
-                )->addIndex(
-                    $setup->getIdxName('icube_peserta_syaiful', ['acara_id']),
-                    ['acara_id']
                 )->addForeignKey(
                     $setup->getFkName('icube_peserta_syaiful', 'acara_id', 'icube_acara_syaiful', 'entity_id'),
                     'acara_id',
                     $setup->getTable('icube_acara_syaiful'),
                     'entity_id',
-                    \Magento\Framework\DB\Ddl\Table::ACTION_NO_ACTION
+                    \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
                 )->setComment("Icube peserta");
             $setup->getConnection()->createTable($table);
         }

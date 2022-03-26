@@ -1,0 +1,111 @@
+type Query {
+    getAcaraById(entity_id: Int!): AcaraOutput
+        @resolver(
+            class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\GetAcaraById"
+        )
+        @doc(
+            description: "The GetAcaraById query returns information about a Acara"
+        )
+    searchAcara(
+        search: String
+            @doc(
+                description: "Performs a full-text search using the specified key words."
+            )
+        filter: AcaraFilterInput
+            @doc(
+                description: "Performs a full-text search using the specified key words."
+            )
+        pageSize: Int = 6
+            @doc(
+                description: "Specifies the maximum number of results to return at once. This attribute is optional."
+            )
+        currentPage: Int = 1
+            @doc(
+                description: "Specifies which page of results to return. The default value is 1."
+            )
+    ): searchAcaraData
+        @resolver(
+            class: "\\Icube\\OkrDivisiCustomSyaifulOverride\\Model\\Resolver\\SearchAcara"
+        )
+        @cache(
+            cacheIdentity: "\\Icube\\OkrDivisiCustomSyaifulOverride\\Model\\Resolver\\SearchAcara\\MyIdentity"
+        )
+}
+
+input AcaraFilterInput {
+    nama: FilterTypeInput @doc(description: "nama Acara")
+    pemateri: FilterTypeInput @doc(description: "pemateri Acara")
+}
+
+type searchAcaraData {
+    total_count: Int @doc(description: "Total count")
+    total_pages: Int @doc(description: "Total count")
+    acaraList: [AcaraOutput]
+}
+
+type Mutation {
+    addAcara(input: addAcaraInput!): AcaraOutput
+        @resolver(
+            class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\AddAcara"
+        )
+        @doc(description: "membuat acara")
+    addPeserta(input: addPesertaInput!): PesertaOutput
+        @resolver(
+            class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\AddPeserta"
+        )
+        @doc(description: "membuat acara")
+    updateAcara(input: updateAcaraInput!): AcaraOutput
+        @resolver(
+            class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\UpdateAcara"
+        )
+        @doc(description: "Memperbarui acara")
+    deleteAcara(entity_id: Int!): StatusOutput
+        @resolver(
+            class: "\\Icube\\OkrDivisiCustomSyaiful\\Model\\Resolver\\DeleteAcara"
+        )
+        @doc(description: "Menghapus acara")
+}
+
+input addPesertaInput {
+    nama: String @doc(description: "nama Peserta")
+    acara_id: Int @doc(description: "acara_id Peserta")
+}
+
+type StatusOutput {
+    status: String @doc(description: "status delete")
+}
+
+type PesertaOutput {
+    entity_id: Int @doc(description: "id Peserta")
+    nama: String @doc(description: "nama Peserta")
+    acara_id: Int @doc(description: "acara_id Peserta")
+}
+
+input updateAcaraInput {
+    entity_id: Int @doc(description: "id Acara")
+    nama: String @doc(description: "nama Acara")
+    pemateri: String @doc(description: "pemateri Acara")
+    tanggal: String @doc(description: "tanggal Acara")
+}
+
+input addAcaraInput {
+    nama: String @doc(description: "nama Acara")
+    pemateri: String @doc(description: "pemateri Acara")
+    tanggal: String @doc(description: "tanggal Acara")
+    peserta: [pesertaInput] @doc(description: "peserta Acara")
+}
+
+input pesertaInput {
+    nama: String @doc(description: "nama Peserta")
+}
+
+type AcaraOutput {
+    entity_id: Int @doc(description: "id Acara")
+    nama: String @doc(description: "nama Acara")
+    pemateri: String @doc(description: "pemateri Acara")
+    tanggal: String @doc(description: "tanggal Acara")
+    peserta: [peserta] @doc(description: "peserta Acara")
+}
+type peserta {
+    nama: String @doc(description: "nama Acara")
+}
