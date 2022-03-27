@@ -13,8 +13,6 @@ use Magento\Catalog\Api\CategoryRepositoryInterface;
 class InstallData implements InstallDataInterface
 {
     private $eavSetupFactory;
-    private $category;
-    private $category2;
     public function __construct(EavSetupFactory $eavSetupFactory, Category $category, CategoryRepositoryInterface $categoryRepository)
     {
         $this->eavSetupFactory = $eavSetupFactory;
@@ -68,7 +66,7 @@ class InstallData implements InstallDataInterface
                 'searchable' => false,
                 'filterable' => false,
                 'comparable' => false,
-                'visible_on_front' => false,
+                'visible_on_front' => true,
                 'used_in_product_listing' => true,
                 'unique' => false,
                 'apply_to' => ''

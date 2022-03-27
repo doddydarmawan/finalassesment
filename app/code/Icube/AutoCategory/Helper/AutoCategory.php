@@ -5,6 +5,7 @@ namespace Icube\AutoCategory\Helper;
 use \Magento\Framework\App\Helper\AbstractHelper;
 use \Magento\Framework\App\Config\ScopeConfigInterface;
 use \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
+use \Magento\Catalog\Api\ProductRepositoryInterface;
 
 class AutoCategory extends AbstractHelper
 {
@@ -13,10 +14,12 @@ class AutoCategory extends AbstractHelper
 
     public function __construct(
         CollectionFactory $productCollectionFactory,
-        ScopeConfigInterface $scopeConfigInterface
+        ScopeConfigInterface $scopeConfigInterface,
+        ProductRepositoryInterface $productRepository
     ) {
         $this->productCollectionFactory = $productCollectionFactory;
         $this->scopeConfigInterface = $scopeConfigInterface;
+        $this->productRepository = $productRepository;
     }
 
     public function autoCategoryCommand($from)
@@ -25,7 +28,7 @@ class AutoCategory extends AbstractHelper
         $result = [];
         $enableon = $this->scopeConfigInterface->getValue('autocategory_setting/configauto/enablemo', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
         $cronon = $this->scopeConfigInterface->getValue('autocategory_setting/configauto/cron', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-        if ($enableon != "yes") {
+        if ($enableon == 0) {
             $result['count'] = $count;
             $result['status'] = "Auto Category Disable";
             return $result;
@@ -53,8 +56,15 @@ class AutoCategory extends AbstractHelper
                     $sku = $product->getSku();
                     $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                     $CategoryLinkRepository = $objectManager->get('\Magento\Catalog\Model\CategoryLinkRepository');
-                    $CategoryLinkRepository->deleteByIds($categoryIdOnNew, $sku);
-                    $count = $count + 1;
+                    // $productId = $product->getId();
+                    // $products = $this->productRepository->getById($productId);
+                    // $products->setData('exclude_from_new', 'true');
+                    // $this->productRepository->save($products);
+                    try {
+                        $CategoryLinkRepository->deleteByIds($categoryIdOnNew, $sku);
+                        $count = $count + 1;
+                    } catch (\Exception $e) {
+                    }
                 }
             }
         }

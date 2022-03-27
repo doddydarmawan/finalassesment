@@ -10,9 +10,10 @@
             <resource>Icube_AutoCategory::autocategory_menu</resource>
              <group id="configauto" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Config</label>
-                 <field id="enablemo" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                 <field id="enablemo" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable</label> 
-                    <comment>Type "yes" for enable auto category/ type "no" for no</comment>
+                    <comment>select "yes" for enable auto category/ select "no" for no</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                  <field id="range" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>New Range </label>

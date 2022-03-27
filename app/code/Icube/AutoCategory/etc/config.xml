@@ -3,7 +3,7 @@
 	<default>
 		<autocategory_setting><!-- section -->
 			<configauto><!-- group -->
-				<enablemo>yes</enablemo><!-- field -->
+				<enablemo>1</enablemo><!-- field -->
 				<range>3</range><!-- field -->
 				<cron>no</cron><!-- field -->
 			</configauto>
